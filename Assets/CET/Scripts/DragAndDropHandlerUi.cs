@@ -8,15 +8,20 @@ public class DragAndDropHandlerUi : MonoBehaviour, IDragHandler, IEndDragHandler
     private GameObject itemOne;
     public GameObject itemTwo;
     private Vector2 initialPosition;
+    private bool isDragable;
 
     void Start()
     {
+        isDragable = true;
         itemOne = this.gameObject;
         initialPosition = this.gameObject.transform.position;
     }
     public void OnDrag(PointerEventData eventData)
     {
-        itemOne.transform.position = Input.mousePosition;
+        if(isDragable == true) {
+            itemOne.transform.position = Input.mousePosition;
+            itemOne.transform.SetAsLastSibling();
+        }
     }
 
     public void OnEndDrag(PointerEventData eventData)
@@ -25,6 +30,7 @@ public class DragAndDropHandlerUi : MonoBehaviour, IDragHandler, IEndDragHandler
         if (distance < 50)
         {
             this.transform.position = itemTwo.transform.position;
+            isDragable = false;
         }
         else
         {
