@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class DragItem : MonoBehaviour, IDragHandler, IEndDragHandler
+public class DragAndDropHandlerUi : MonoBehaviour, IDragHandler, IEndDragHandler
 {
     private GameObject itemOne;
     public GameObject itemTwo;
