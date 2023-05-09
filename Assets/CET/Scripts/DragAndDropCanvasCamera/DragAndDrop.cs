@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Ui.ScoreSystem;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -47,5 +48,10 @@ public class DragAndDrop : MonoBehaviour,IPointerDownHandler,IBeginDragHandler,I
     }
     public void ResetIsDrop() {
         isDrop = true;
+    }
+
+    public void UpdateScore()
+    {
+        ScoreManager.Instance.UpdateScore(10, 10);
     }
 }
