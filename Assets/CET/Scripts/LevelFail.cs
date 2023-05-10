@@ -46,10 +46,10 @@ public class LevelFail : MonoSingleton<LevelFail>
     }
     internal void OnHomeButtonPressed()
     {
-        StartCoroutine(UloadScene());
+        StartCoroutine(UnloadScene());
     }
 
-    IEnumerator UloadScene()
+    IEnumerator UnloadScene()
     {
         yield return SceneManager.UnloadSceneAsync("CETinterface");
         //yield return SceneManager.LoadSceneAsync("Home");

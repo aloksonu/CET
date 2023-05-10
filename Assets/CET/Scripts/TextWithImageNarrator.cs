@@ -61,11 +61,14 @@ public class TextWithImageNarrator : MonoSingleton<TextWithImageNarrator>
         isNarratorOpen = false;
         if (_onCompleteNarrator != null)
         {
-            _canvasGroup.UpdateState(false, _fadeDuration, () => {
+            _onCompleteNarrator();
+            _onCompleteNarrator = null;
+            _canvasGroup.UpdateState(false, _fadeDuration);
+            //_canvasGroup.UpdateState(false, _fadeDuration, () => {
 
-                _onCompleteNarrator();
-                _onCompleteNarrator = null;
-            });
+            //    _onCompleteNarrator();
+            //    _onCompleteNarrator = null;
+            //});
         }
         else
         {

@@ -58,13 +58,13 @@ public class DragAndDrop : MonoBehaviour,IPointerDownHandler,IBeginDragHandler,I
         isDrop = true;
         UpdateScore();
         if(id==1)
-            TextWithImageNarrator.Instance.BringInNarrator(TextWithImageNarrator.Instance.NTopArea, TextWithImageNarrator.Instance.spriteTopArea);
+            TextWithImageNarrator.Instance.BringInNarrator(TextWithImageNarrator.Instance.NTopArea, TextWithImageNarrator.Instance.spriteTopArea,() =>CETinterfaceManager.Instance.UpdateDragedCounter());
         else if (id == 2)
-            TextWithImageNarrator.Instance.BringInNarrator(TextWithImageNarrator.Instance.NComponentsArea, TextWithImageNarrator.Instance.spriteComponentsArea);
+            TextWithImageNarrator.Instance.BringInNarrator(TextWithImageNarrator.Instance.NComponentsArea, TextWithImageNarrator.Instance.spriteComponentsArea, () =>CETinterfaceManager.Instance.UpdateDragedCounter());
         else if (id == 3)
-            TextWithImageNarrator.Instance.BringInNarrator(TextWithImageNarrator.Instance.N2DArea, TextWithImageNarrator.Instance.sprite2DArea);
+            TextWithImageNarrator.Instance.BringInNarrator(TextWithImageNarrator.Instance.N2DArea, TextWithImageNarrator.Instance.sprite2DArea, () =>CETinterfaceManager.Instance.UpdateDragedCounter());
         else if (id == 4)
-            TextWithImageNarrator.Instance.BringInNarrator(TextWithImageNarrator.Instance.N3DArea, TextWithImageNarrator.Instance.sprite3DArea);
+            TextWithImageNarrator.Instance.BringInNarrator(TextWithImageNarrator.Instance.N3DArea, TextWithImageNarrator.Instance.sprite3DArea, () =>CETinterfaceManager.Instance.UpdateDragedCounter());
     }
 
     public void UpdateScore()
