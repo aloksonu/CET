@@ -42,16 +42,38 @@ public class DragAndDrop : MonoBehaviour,IPointerDownHandler,IBeginDragHandler,I
         Debug.Log("On Pointer Down");
     }
 
-    public void ReserPosition()
+    public void ResetPosition()
     {
         transform.position = initialPos;
+      }
+    public void UpdateHealth()
+    {
+        HealthManager.Instance.UpdateHealth(1);
+        if (HealthManager.Instance.GetHealth() <= 0)
+        {
+            LevelFail.Instance.BringIn();
+        }
     }
-    public void ResetIsDrop() {
+    public void UpdateIsDrop() {
         isDrop = true;
+        UpdateScore();
+        if(id==1)
+            TextWithImageNarrator.Instance.BringInNarrator(TextWithImageNarrator.Instance.NTopArea, TextWithImageNarrator.Instance.spriteTopArea);
+        else if (id == 2)
+            TextWithImageNarrator.Instance.BringInNarrator(TextWithImageNarrator.Instance.NComponentsArea, TextWithImageNarrator.Instance.spriteComponentsArea);
+        else if (id == 3)
+            TextWithImageNarrator.Instance.BringInNarrator(TextWithImageNarrator.Instance.N2DArea, TextWithImageNarrator.Instance.sprite2DArea);
+        else if (id == 4)
+            TextWithImageNarrator.Instance.BringInNarrator(TextWithImageNarrator.Instance.N3DArea, TextWithImageNarrator.Instance.sprite3DArea);
     }
 
     public void UpdateScore()
     {
         ScoreManager.Instance.UpdateScore(10, 10);
+    }
+
+    public void ResetIsDrop()
+    {
+        isDrop = false;
     }
 }

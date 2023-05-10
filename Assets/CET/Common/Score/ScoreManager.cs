@@ -14,13 +14,15 @@ namespace Ui.ScoreSystem
         
         void Start()
         {
-            Reset();
+            ResetScore();
         }
 
-        internal void Reset()
+        internal void ResetScore()
         {
             _maxScore = 0;
             _score = 0;
+            scoreTextMeshProUGUI.text = _score.ToString();
+            maxScoreTextMeshProUGUI.text = _maxScore.ToString();
         }
 
         internal void UpdateScore(int score ,int maxScore)
