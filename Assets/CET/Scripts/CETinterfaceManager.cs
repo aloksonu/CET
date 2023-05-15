@@ -6,10 +6,22 @@ using Utilities;
 public class CETinterfaceManager : MonoSingleton<CETinterfaceManager>
 {
     [SerializeField] GameObject[] dragObjects;
+    private List<Vector3> listPos = new List<Vector3>();
     private int dragCounter;
     void Start()
     {
         dragCounter = 0;
+
+        for (int i = 0; i< dragObjects.Length;i++)
+        {
+            listPos.Add(dragObjects[i].transform.position);
+        }
+        listPos.Shuffle();
+        for (int i = 0; i < dragObjects.Length; i++)
+        {
+            dragObjects[i].transform.position = listPos[i];
+        }
+
     }
 
     internal void ResetGame()

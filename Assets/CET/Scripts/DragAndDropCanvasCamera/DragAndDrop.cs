@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Ui.ScoreSystem;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using Utilities;
 
 public class DragAndDrop : MonoBehaviour,IPointerDownHandler,IBeginDragHandler,IEndDragHandler,IDragHandler
 {
@@ -18,6 +19,12 @@ public class DragAndDrop : MonoBehaviour,IPointerDownHandler,IBeginDragHandler,I
         isDrop = false;
         rt = GetComponent<RectTransform>();
         cg = GetComponent<CanvasGroup>();
+        //initialPos = transform.position;
+        this.Invoke(() => SetInitialPosition(), 0.2f);
+    }
+
+    private void SetInitialPosition()
+    {
         initialPos = transform.position;
     }
 
