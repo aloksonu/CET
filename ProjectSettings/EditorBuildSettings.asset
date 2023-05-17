@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/CET/Scenes/CETinterface.unity
     guid: f4f7457bc8697cf4285864ee99eebf90
+  - enabled: 1
+    path: Assets/CET/Scenes/CET Installation.unity
+    guid: d74dba30e2fd7da4aa86509cd1a5a47c
   m_configObjects: {}
