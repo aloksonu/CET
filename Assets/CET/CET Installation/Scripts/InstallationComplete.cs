@@ -48,6 +48,6 @@ public class InstallationComplete : MonoBehaviour
 
     IEnumerator UnloadScene()
     {
-        yield return SceneManager.UnloadSceneAsync("CET Installation");
+        yield return SceneManager.UnloadSceneAsync("CETInstallation");
     }
 }

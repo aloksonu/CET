@@ -10,6 +10,7 @@ public class AddWrokspace : MonoBehaviour
     private static Action _onComplete;
     [SerializeField] private CanvasGroup _canvasGroup;
     [SerializeField] private Button btnContinue;
+    //[SerializeField] private Toggle toggle1;
     private float _fadeDuration = 0.1f;
     private bool isToggle1;
     private bool isToggle2;
@@ -19,23 +20,23 @@ public class AddWrokspace : MonoBehaviour
           isToggle1 = false;
           isToggle2 = false;
           isToggle3 = false;
-    btnContinue.onClick.AddListener(BringOut);
+          btnContinue.onClick.AddListener(BringOut);
         _canvasGroup.UpdateState(false, 0);
     }
     public void useToggle1(bool b)
     {
         isToggle1 = b;
-        Debug.Log(isToggle1);
+        //Debug.Log(isToggle1);
     }
     public void useToggle2(bool b)
     {
         isToggle2 = b;
-        Debug.Log(isToggle2);
+        //Debug.Log(isToggle2);
     }
     public void useToggle3(bool b)
     {
         isToggle3 = b;
-        Debug.Log(isToggle3);
+        //Debug.Log(isToggle3);
     }
 
     internal void BringIn(Action onComplete = null)
@@ -58,8 +59,5 @@ public class AddWrokspace : MonoBehaviour
             Debug.Log("Please tick all required togglel for contineue");
         }
 
-        //Debug.Log(isToggle1);
-        //Debug.Log(isToggle2);
-        //Debug.Log(isToggle3);
     }
 }

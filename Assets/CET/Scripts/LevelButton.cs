@@ -22,6 +22,7 @@ public enum LevelsName
 {
 
     NotSet = -1,
-    CETinterface = 0,
-    CETnavigation = 1,
+    CETInstallation = 0,
+    CETinterface = 1,
+    CETnavigation = 2,
 }
