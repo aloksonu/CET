@@ -14,5 +14,8 @@
         InstallAddRepository = 7,
         InstallCongratulation = 8,
 
+        ButtonClick = 9,
+        Toggle = 10,
+
     }
 }

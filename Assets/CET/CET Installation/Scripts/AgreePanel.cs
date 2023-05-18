@@ -1,4 +1,6 @@
+using Audio.CET;
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using Utilities;
@@ -26,6 +28,12 @@ public class AgreePanel : MonoBehaviour
     }
     internal void BringOut()
     {
+        StartCoroutine(EBringOut());
+    }
+    IEnumerator EBringOut()
+    {
+        GenericAudioManager.Instance.PlaySound(AudioName.ButtonClick);
+        yield return new WaitForSeconds(GenericAudioManager.Instance.GetAudioLength(AudioName.ButtonClick));
         if (_onComplete != null && isToggle == true)
         {
             _canvasGroup.UpdateState(false, _fadeDuration, () => {
@@ -37,11 +45,11 @@ public class AgreePanel : MonoBehaviour
         {
             Debug.Log("Please agree for contineue");
         }
-
     }
+        public void useToggle(bool b)
+   {
 
-    public void useToggle(bool b)
-    {
+        GenericAudioManager.Instance.PlaySound(AudioName.Toggle);
         isToggle = b;
 
     }

@@ -1,3 +1,4 @@
+using Audio.CET;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,7 +16,7 @@ public class LevelPanel : MonoSingleton<LevelPanel>
     void Start()
     {
         _canvasGroup.UpdateState(false, 0);
-        btnBack.onClick.AddListener(OnBackButtonPressed);
+        btnBack.onClick.AddListener(()=>StartCoroutine(OnBackButtonPressed()));
     }
     private void OnDestroy()
     {
@@ -27,14 +28,18 @@ public class LevelPanel : MonoSingleton<LevelPanel>
             StartCoroutine(_loadGame(currentSceneName));
         });
     }
-    private void OnBackButtonPressed()
+    private IEnumerator OnBackButtonPressed()
     {
+        GenericAudioManager.Instance.PlaySound(AudioName.ButtonClick);
+        yield return new WaitForSeconds(GenericAudioManager.Instance.GetAudioLength(AudioName.ButtonClick));
         _canvasGroup.UpdateState(false, _fadeDuration, () => {
             StartPanel.Instance.BringIn();
         });
     }
     private IEnumerator _loadGame(string currentSceneName)
     {
+        GenericAudioManager.Instance.PlaySound(AudioName.ButtonClick);
+        yield return new WaitForSeconds(GenericAudioManager.Instance.GetAudioLength(AudioName.ButtonClick));
         LoadingPanel.Instance.BringIn();
         yield return SceneManager.LoadSceneAsync(currentSceneName, LoadSceneMode.Additive);
         LoadingPanel.Instance.BringOut();

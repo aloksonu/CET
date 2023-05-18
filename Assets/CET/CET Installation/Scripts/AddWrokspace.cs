@@ -1,3 +1,4 @@
+using Audio.CET;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -25,18 +26,18 @@ public class AddWrokspace : MonoBehaviour
     }
     public void useToggle1(bool b)
     {
+        GenericAudioManager.Instance.PlaySound(AudioName.Toggle);
         isToggle1 = b;
-        //Debug.Log(isToggle1);
     }
     public void useToggle2(bool b)
     {
+        GenericAudioManager.Instance.PlaySound(AudioName.Toggle);
         isToggle2 = b;
-        //Debug.Log(isToggle2);
     }
     public void useToggle3(bool b)
     {
+        GenericAudioManager.Instance.PlaySound(AudioName.Toggle);
         isToggle3 = b;
-        //Debug.Log(isToggle3);
     }
 
     internal void BringIn(Action onComplete = null)
@@ -47,7 +48,15 @@ public class AddWrokspace : MonoBehaviour
 
     private void BringOut()
     {
-        if(isToggle1 == true && isToggle2 == true && isToggle3 == true)
+        StartCoroutine(EBringOut());
+    }
+
+
+    IEnumerator EBringOut()
+    {
+        GenericAudioManager.Instance.PlaySound(AudioName.ButtonClick);
+        yield return new WaitForSeconds(GenericAudioManager.Instance.GetAudioLength(AudioName.ButtonClick));
+        if (isToggle1 == true && isToggle2 == true && isToggle3 == true)
         {
             _canvasGroup.UpdateState(false, _fadeDuration, () => {
                 _onComplete();
@@ -58,6 +67,5 @@ public class AddWrokspace : MonoBehaviour
         {
             Debug.Log("Please tick all required togglel for contineue");
         }
-
     }
-}
+  }

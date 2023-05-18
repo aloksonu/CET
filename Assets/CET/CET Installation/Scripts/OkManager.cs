@@ -1,4 +1,6 @@
+using Audio.CET;
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using Utilities;
@@ -29,9 +31,16 @@ public class OkManager : MonoBehaviour
     }
     internal void BringOut()
     {
+        StartCoroutine(EBringOut());
+    }
+
+    IEnumerator EBringOut()
+    {
+        GenericAudioManager.Instance.PlaySound(AudioName.ButtonClick);
+        yield return new WaitForSeconds(GenericAudioManager.Instance.GetAudioLength(AudioName.ButtonClick));
         if (_onComplete != null)
         {
-            _canvasGroup.UpdateState(false, _fadeDuration,()=> {
+            _canvasGroup.UpdateState(false, _fadeDuration, () => {
                 _onComplete();
                 _onComplete = null;
             });
@@ -42,6 +51,5 @@ public class OkManager : MonoBehaviour
                 _onComplete = null;
             });
         }
-
     }
 }

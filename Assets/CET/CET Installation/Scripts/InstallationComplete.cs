@@ -1,3 +1,4 @@
+using Audio.CET;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -48,6 +49,8 @@ public class InstallationComplete : MonoBehaviour
 
     IEnumerator UnloadScene()
     {
+        GenericAudioManager.Instance.PlaySound(AudioName.ButtonClick);
+        yield return new WaitForSeconds(GenericAudioManager.Instance.GetAudioLength(AudioName.ButtonClick));
         yield return SceneManager.UnloadSceneAsync("CETInstallation");
     }
 }

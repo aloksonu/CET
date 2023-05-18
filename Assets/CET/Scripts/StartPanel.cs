@@ -1,3 +1,4 @@
+using Audio.CET;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,8 +13,8 @@ public class StartPanel : MonoSingleton<StartPanel>
     void Start()
     {
         _canvasGroup.UpdateState(true, 0);
-        btnLevel.onClick.AddListener(OnLevelButtonPressed);
-        btnClose.onClick.AddListener(OnCloseButtonPressed);
+        btnLevel.onClick.AddListener(()=> StartCoroutine(OnLevelButtonPressed()));
+        btnClose.onClick.AddListener(() => StartCoroutine(OnCloseButtonPressed()));
     }
 
     private void OnDestroy()
@@ -21,15 +22,19 @@ public class StartPanel : MonoSingleton<StartPanel>
         btnLevel.onClick.RemoveAllListeners();
         btnClose.onClick.RemoveAllListeners();
     }
-    private void OnLevelButtonPressed()
+    private IEnumerator OnLevelButtonPressed()
     {
+        GenericAudioManager.Instance.PlaySound(AudioName.ButtonClick);
+        yield return new WaitForSeconds(GenericAudioManager.Instance.GetAudioLength(AudioName.ButtonClick));
         _canvasGroup.UpdateState(false, _fadeDuration, () => {
 
             LevelPanel.Instance.BringIn();
         });
     }
-    private void OnCloseButtonPressed()
+    private IEnumerator OnCloseButtonPressed()
     {
+        GenericAudioManager.Instance.PlaySound(AudioName.ButtonClick);
+        yield return new WaitForSeconds(GenericAudioManager.Instance.GetAudioLength(AudioName.ButtonClick));
         Application.Quit();
     }
     internal void BringIn()
