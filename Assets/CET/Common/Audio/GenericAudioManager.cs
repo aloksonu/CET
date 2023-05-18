@@ -4,7 +4,7 @@ using UnityEngine.Audio;
 using Utilities;
 using Logger = Utilities.Logger;
 
-namespace Audio.Warehouse
+namespace Audio.CET
 {
     public class GenericAudioManager : PersistentMonoSingleton<GenericAudioManager>
     {

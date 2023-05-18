@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Audio.Warehouse
+namespace Audio.CET
 {
     [System.Serializable]
     public class AudioElement

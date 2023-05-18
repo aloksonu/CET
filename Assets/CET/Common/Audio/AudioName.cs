@@ -1,12 +1,18 @@
-﻿namespace Audio.Warehouse
+﻿namespace Audio.CET
 {
     public enum AudioName
     {
 
         NotSet=-1,
-        GameBG = 0,
-        ButtonClick = 1,
-        Correct = 2,
-        Wrong = 3,
+        InstallStart = 0,
+        InstallPrerequisites = 1,
+        InstallDownloadPanel = 2,
+        InstallInstallerPanel = 3,
+        InstallAgree = 4,
+        InstallAll = 5,
+        InstallWorkspace = 6,
+        InstallAddRepository = 7,
+        InstallCongratulation = 8,
+
     }
 }
