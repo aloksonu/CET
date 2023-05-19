@@ -1,3 +1,4 @@
+using Audio.CET;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,6 +11,7 @@ public class CETinterfaceManager : MonoSingleton<CETinterfaceManager>
     private int dragCounter;
     void Start()
     {
+        GenericAudioManager.Instance.PlaySound(AudioName.CETinterface);
         dragCounter = 0;
 
         for (int i = 0; i< dragObjects.Length;i++)

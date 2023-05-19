@@ -17,5 +17,9 @@
         ButtonClick = 9,
         Toggle = 10,
 
+        CETinterface = 11,
+        Correct = 12,
+        Wrong = 13,
+
     }
 }
