@@ -1,4 +1,6 @@
+using Audio.CET;
 using System;
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -45,19 +47,29 @@ public class TextWithImageNarrator : MonoSingleton<TextWithImageNarrator>
     {
         btnClose.onClick.RemoveAllListeners();
     }
-    internal void BringInNarrator(string narratorText, Sprite spr,
+    internal void BringInNarrator(string narratorText, AudioName audioName , Sprite spr,
      Action onCompleteNarrator = null)
     {
+        btnClose.interactable = false;
         _narratorText = narratorText;
         textTMP.text = _narratorText;
         img.sprite = spr;
         _onCompleteNarrator = onCompleteNarrator;
         isNarratorOpen = true;
-        _canvasGroup.UpdateState(true, _fadeDuration);
+        _canvasGroup.UpdateState(true, _fadeDuration , ()=> { StartCoroutine(PlayAudio(audioName));});
+    }
+
+    private IEnumerator PlayAudio(AudioName audioName)
+    {
+        yield return new WaitForSeconds(0.5f);
+        GenericAudioManager.Instance.PlaySound(audioName);
+        yield return new WaitForSeconds(GenericAudioManager.Instance.GetAudioLength(audioName));
+        btnClose.interactable = true;
     }
 
     internal void BringOutNarrator()
     {
+        GenericAudioManager.Instance.PlaySound(AudioName.ButtonClick);
         isNarratorOpen = false;
         if (_onCompleteNarrator != null)
         {

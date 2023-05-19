@@ -1,3 +1,4 @@
+using Audio.CET;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -37,6 +38,7 @@ public class LevelFail : MonoSingleton<LevelFail>
     {
         //UiBgHandeler.Instance.BringOut();
         // CanvasGroup _canvasGroup1 = _canvasGroup;
+        GenericAudioManager.Instance.PlaySound(AudioName.ButtonClick);
         _canvasGroup.UpdateState(false, _fadeDuration, () => {
             ScoreManager.Instance.ResetScore();
             HealthManager.Instance.ResetHealth();
@@ -46,6 +48,7 @@ public class LevelFail : MonoSingleton<LevelFail>
     }
     internal void OnHomeButtonPressed()
     {
+        GenericAudioManager.Instance.PlaySound(AudioName.ButtonClick);
         StartCoroutine(UnloadScene());
     }
 

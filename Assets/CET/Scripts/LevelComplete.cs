@@ -1,3 +1,4 @@
+using Audio.CET;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -38,6 +39,7 @@ public class LevelComplete : MonoSingleton<LevelComplete>
     }
     internal void OnNextButtonPressed()
     {
+        GenericAudioManager.Instance.PlaySound(AudioName.ButtonClick);
         _canvasGroup.UpdateState(false, _fadeDuration, () => {
             //Player.Instance.SetPlayerTransformPosition();
             //Player.Instance.SetPlayerTransformPosition();
@@ -45,6 +47,7 @@ public class LevelComplete : MonoSingleton<LevelComplete>
     }
     internal void OnHomeButtonPressed()
     {
+        GenericAudioManager.Instance.PlaySound(AudioName.ButtonClick);
         StartCoroutine(UnloadScene());
     }
 

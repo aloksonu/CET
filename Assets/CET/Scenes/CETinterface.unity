@@ -4663,7 +4663,7 @@ MonoBehaviour:
   _canvasGroup: {fileID: 1035579790}
   btnRetry: {fileID: 1577742798}
   btnHome: {fileID: 450403874}
-  levelFailTextMeshProUGUI: {fileID: 0}
+  levelFailTextMeshProUGUI: {fileID: 131986875}
 --- !u!225 &1035579790
 CanvasGroup:
   m_ObjectHideFlags: 0

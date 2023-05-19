@@ -20,6 +20,10 @@
         CETinterface = 11,
         Correct = 12,
         Wrong = 13,
+        TopArea = 14,
+        ComponentsArea = 15,
+        TwoDView = 16,
+        ThreeDView = 17,
 
     }
 }
