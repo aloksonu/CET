@@ -25,5 +25,9 @@
         TwoDView = 16,
         ThreeDView = 17,
 
+        CET = 18,
+        Emacs = 19,
+        CM = 20,
+
     }
 }

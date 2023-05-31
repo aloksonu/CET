@@ -1,15 +1,20 @@
+using Audio.CET;
 using System.Collections;
 using System.Collections.Generic;
+using Ui.ScoreSystem;
 using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
+    [SerializeField] private IntroTextNarrator introTextNarrator;
     public JoystickMovement joystickMovement;
     public float playerSpeed;
     private Rigidbody2D rb;
     private Vector2 playerInitialPosition;
+    private int collectCounter;
     void Start()
     {
+        collectCounter = 0;
         playerInitialPosition = this.transform.position;
         rb = GetComponent<Rigidbody2D>();
     }
@@ -28,27 +33,54 @@ public class PlayerMove : MonoBehaviour
     }
     void OnTriggerEnter2D(Collider2D other)
     {
+        StartCoroutine(CallOnCollide(other.gameObject));
+    }
 
-        if (other.gameObject.GetComponent<SubLevelName>().subLevelName == SubLevel.CET)
+    private IEnumerator CallOnCollide(GameObject other)
+    {
+        yield return new WaitForSeconds(0.0f);
+        if (other.GetComponent<SubLevelName>().subLevelName == SubLevel.CET)
         {
-            StartCoroutine(CallOnCorrect(other.gameObject));
-            //other.gameObject.SetActive(false);
+            collectCounter++;
+            ScoreManager.Instance.UpdateScore(10, 10);
+            GenericAudioManager.Instance.PlaySound(AudioName.Correct);
+            string str = introTextNarrator.CET1 + introTextNarrator.CET2;
+            other.SetActive(false);
+            yield return new WaitForSeconds(0.0f);
+            introTextNarrator.BringInNarrator(str, OnComplete, other.GetComponent<SubLevelName>().audioName);
         }
-        if (other.gameObject.GetComponent<SubLevelName>().subLevelName == SubLevel.EMacs)
+        else if (other.GetComponent<SubLevelName>().subLevelName == SubLevel.EMacs)
         {
-            StartCoroutine(CallOnCorrect(other.gameObject));
-            //other.gameObject.SetActive(false);
+            collectCounter++;
+            ScoreManager.Instance.UpdateScore(10, 10);
+            GenericAudioManager.Instance.PlaySound(AudioName.Correct);
+            string str = introTextNarrator.Emacs;
+            other.SetActive(false);
+            yield return new WaitForSeconds(0.0f);
+            introTextNarrator.BringInNarrator(str, OnComplete, other.GetComponent<SubLevelName>().audioName);
         }
-        if (other.gameObject.GetComponent<SubLevelName>().subLevelName == SubLevel.CM)
+        else if (other.GetComponent<SubLevelName>().subLevelName == SubLevel.CM)
         {
-            StartCoroutine(CallOnCorrect(other.gameObject));
-            //other.gameObject.SetActive(false);
+            collectCounter++;
+            ScoreManager.Instance.UpdateScore(10, 10);
+            GenericAudioManager.Instance.PlaySound(AudioName.Correct);
+            string str = introTextNarrator.CM1 + introTextNarrator.CM2;
+            other.SetActive(false);
+            yield return new WaitForSeconds(0.0f);
+            introTextNarrator.BringInNarrator(str, OnComplete, other.GetComponent<SubLevelName>().audioName);
+        }
+        else
+        {
+            GenericAudioManager.Instance.PlaySound(AudioName.Wrong);
+            GetComponent<BoxCollider2D>().enabled = false;
+            LevelFail.Instance.BringIn();
         }
     }
 
-    private IEnumerator CallOnCorrect(GameObject other)
+    private void OnComplete()
     {
-        other.SetActive(false);
-        yield return new WaitForSeconds(0.0f);
+        if (collectCounter >= 3) {
+            LevelComplete.Instance.BringIn();
+        }       
     }
 }
