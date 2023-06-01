@@ -1,4 +1,5 @@
 using Audio.CET;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -9,8 +10,10 @@ using Utilities;
 
 public class InstallationComplete : MonoBehaviour
 {
+    private static Action _onComplete;
     [SerializeField] private CanvasGroup _canvasGroup;
     [SerializeField] private Button btnNext, btnHome;
+    [SerializeField] private Button btnOK;
     [SerializeField] private TextMeshProUGUI gameCompleteTextMeshProUGUI;
     private float _fadeDuration = 0.2f;
 
@@ -20,14 +23,17 @@ public class InstallationComplete : MonoBehaviour
         _canvasGroup.UpdateState(false, 0);
         btnNext.onClick.AddListener(OnNextButtonPressed);
         btnHome.onClick.AddListener(OnHomeButtonPressed);
+        btnOK.onClick.AddListener(()=> StartCoroutine(OnClickOkButton()));
     }
     private void OnDestroy()
     {
         btnNext.onClick.RemoveAllListeners();
         btnHome.onClick.RemoveAllListeners();
+        btnOK.onClick.RemoveAllListeners();
     }
-    internal void BringIn(float fadeDuration = 0.2f)
+    internal void BringIn(Action onComplete = null,float fadeDuration = 0.2f)
     {
+        _onComplete = onComplete;
         _fadeDuration = fadeDuration;
         _canvasGroup.UpdateState(true, _fadeDuration);
     }
@@ -52,5 +58,18 @@ public class InstallationComplete : MonoBehaviour
         GenericAudioManager.Instance.PlaySound(AudioName.ButtonClick);
         yield return new WaitForSeconds(GenericAudioManager.Instance.GetAudioLength(AudioName.ButtonClick));
         yield return SceneManager.UnloadSceneAsync("CETInstallation");
+    }
+
+    private IEnumerator OnClickOkButton()
+    {
+        GenericAudioManager.Instance.PlaySound(AudioName.ButtonClick);
+        yield return new WaitForSeconds(GenericAudioManager.Instance.GetAudioLength(AudioName.ButtonClick));
+        if (_onComplete != null)
+        {
+            _canvasGroup.UpdateState(false, _fadeDuration, () => {
+                _onComplete();
+                _onComplete = null;
+            });
+        }
     }
 }

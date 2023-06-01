@@ -18,8 +18,8 @@ public class CETinstallationManager : MonoBehaviour
     [SerializeField] private InstallationComplete installationComplete;
     void Start()
     {
-        this.Invoke(BeginStartPanel, 0.03f);
-        //this.Invoke(BeginAddWorkspace, 0.03f);
+        //this.Invoke(BeginStartPanel, 0.03f);
+        this.Invoke(BeginAddWorkspace, 0.03f);
         //BeginStartPanel();
     }
 
@@ -67,6 +67,6 @@ public class CETinstallationManager : MonoBehaviour
     private void BeginInstallationComplete()
     {
         CETAudioManager.Instance.PlayAudio(AudioName.InstallCongratulation, canvas, 0.2f);
-        installationComplete.BringIn();
+        installationComplete.BringIn(()=> {LevelComplete.Instance.BringIn();});
     }
 }

@@ -44,6 +44,7 @@ public class LevelFail : MonoSingleton<LevelFail>
         //});
         SceneManager.UnloadSceneAsync(LevelPanel.Instance.levelName.ToString());
         SceneManager.LoadSceneAsync(LevelPanel.Instance.levelName.ToString(), LoadSceneMode.Additive);
+        _canvasGroup.UpdateState(false, 0);
     }
     internal void OnHomeButtonPressed()
     {
@@ -54,5 +55,6 @@ public class LevelFail : MonoSingleton<LevelFail>
     IEnumerator UnloadScene()
     {
         yield return SceneManager.UnloadSceneAsync(LevelPanel.Instance.levelName.ToString());
+        _canvasGroup.UpdateState(false, 0);
     }
 }

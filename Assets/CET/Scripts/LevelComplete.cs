@@ -54,6 +54,7 @@ public class LevelComplete : MonoSingleton<LevelComplete>
     {
         //yield return SceneManager.UnloadSceneAsync("CETinterface");
         yield return SceneManager.UnloadSceneAsync(LevelPanel.Instance.levelName.ToString());
+        _canvasGroup.UpdateState(false, 0);
     }
     IEnumerator LoadNextScene()
     {
@@ -74,6 +75,7 @@ public class LevelComplete : MonoSingleton<LevelComplete>
             //StartCoroutine(UnloadScene());
         }
         yield return SceneManager.LoadSceneAsync(LevelPanel.Instance.levelName.ToString(), LoadSceneMode.Additive);
+        _canvasGroup.UpdateState(false, 0);
     }
 
     private void UnlockNextLevel()
