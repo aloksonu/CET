@@ -40,7 +40,8 @@ public class LevelComplete : MonoSingleton<LevelComplete>
     internal void OnNextButtonPressed()
     {
         GenericAudioManager.Instance.PlaySound(AudioName.ButtonClick);
-        _canvasGroup.UpdateState(false, _fadeDuration);
+        //_canvasGroup.UpdateState(false, _fadeDuration);
+        StartCoroutine(LoadNextScene());
     }
     internal void OnHomeButtonPressed()
     {
@@ -53,6 +54,26 @@ public class LevelComplete : MonoSingleton<LevelComplete>
     {
         //yield return SceneManager.UnloadSceneAsync("CETinterface");
         yield return SceneManager.UnloadSceneAsync(LevelPanel.Instance.levelName.ToString());
+    }
+    IEnumerator LoadNextScene()
+    {
+    
+        yield return SceneManager.UnloadSceneAsync(LevelPanel.Instance.levelName.ToString());
+
+        if (LevelPanel.Instance.levelName == LevelsName.ConfiguraIntroduction)
+        {
+            LevelPanel.Instance.levelName = LevelsName.CETInstallation;
+        }
+        else if (LevelPanel.Instance.levelName == LevelsName.CETInstallation)
+        {
+            LevelPanel.Instance.levelName = LevelsName.CETinterface;
+        }
+        else if (LevelPanel.Instance.levelName == LevelsName.CETinterface)
+        {
+            //LevelPanel.Instance.levelName = LevelsName.ConfiguraIntroduction;
+            //StartCoroutine(UnloadScene());
+        }
+        yield return SceneManager.LoadSceneAsync(LevelPanel.Instance.levelName.ToString(), LoadSceneMode.Additive);
     }
 
     private void UnlockNextLevel()
