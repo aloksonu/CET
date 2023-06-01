@@ -40,10 +40,7 @@ public class LevelComplete : MonoSingleton<LevelComplete>
     internal void OnNextButtonPressed()
     {
         GenericAudioManager.Instance.PlaySound(AudioName.ButtonClick);
-        _canvasGroup.UpdateState(false, _fadeDuration, () => {
-            //Player.Instance.SetPlayerTransformPosition();
-            //Player.Instance.SetPlayerTransformPosition();
-        });
+        _canvasGroup.UpdateState(false, _fadeDuration);
     }
     internal void OnHomeButtonPressed()
     {
@@ -54,7 +51,8 @@ public class LevelComplete : MonoSingleton<LevelComplete>
 
     IEnumerator UnloadScene()
     {
-        yield return SceneManager.UnloadSceneAsync("CETinterface");
+        //yield return SceneManager.UnloadSceneAsync("CETinterface");
+        yield return SceneManager.UnloadSceneAsync(LevelPanel.Instance.levelName.ToString());
     }
 
     private void UnlockNextLevel()

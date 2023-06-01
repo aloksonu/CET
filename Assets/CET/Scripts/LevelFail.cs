@@ -36,15 +36,14 @@ public class LevelFail : MonoSingleton<LevelFail>
     }
     internal void OnRetryButtonPressed()
     {
-        //UiBgHandeler.Instance.BringOut();
-        // CanvasGroup _canvasGroup1 = _canvasGroup;
         GenericAudioManager.Instance.PlaySound(AudioName.ButtonClick);
-        _canvasGroup.UpdateState(false, _fadeDuration, () => {
-            ScoreManager.Instance.ResetScore();
-            HealthManager.Instance.ResetHealth();
-            CETinterfaceManager.Instance.ResetGame();
-            //Player.Instance.SetLevel();
-        });
+        //_canvasGroup.UpdateState(false, _fadeDuration, () => {
+        //    ScoreManager.Instance.ResetScore();
+        //    HealthManager.Instance.ResetHealth();
+        //    CETinterfaceManager.Instance.ResetGame();
+        //});
+        SceneManager.UnloadSceneAsync(LevelPanel.Instance.levelName.ToString());
+        SceneManager.LoadSceneAsync(LevelPanel.Instance.levelName.ToString(), LoadSceneMode.Additive);
     }
     internal void OnHomeButtonPressed()
     {
@@ -54,7 +53,6 @@ public class LevelFail : MonoSingleton<LevelFail>
 
     IEnumerator UnloadScene()
     {
-        yield return SceneManager.UnloadSceneAsync("CETinterface");
-        //yield return SceneManager.LoadSceneAsync("Home");
+        yield return SceneManager.UnloadSceneAsync(LevelPanel.Instance.levelName.ToString());
     }
 }

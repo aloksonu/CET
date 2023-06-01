@@ -14,7 +14,7 @@ public class LevelButton : MonoBehaviour
 
     private void OnClickLeveButton()
     {
-        //LevelPanel.Instance.levelName = levelsName.ToString();
+        LevelPanel.Instance.levelName = levelsName;
         LevelPanel.Instance.OnContinueButtonPressed(levelsName.ToString());
     }
 }
@@ -22,7 +22,8 @@ public enum LevelsName
 {
 
     NotSet = -1,
-    CETInstallation = 0,
-    CETinterface = 1,
-    CETnavigation = 2,
+    ConfiguraIntroduction =0,
+    CETInstallation = 1,
+    CETinterface = 2,
+    CETnavigation = 3,
 }

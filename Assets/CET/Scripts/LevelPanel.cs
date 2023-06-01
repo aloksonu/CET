@@ -10,7 +10,7 @@ public class LevelPanel : MonoSingleton<LevelPanel>
 {
     [SerializeField] private CanvasGroup _canvasGroup;
     [SerializeField] private Button btnBack;
-    internal string levelName;
+    internal LevelsName levelName;
     private float _fadeDuration = 0.2f;
     private string _currentSceneName = "CETinterface";
     void Start()
