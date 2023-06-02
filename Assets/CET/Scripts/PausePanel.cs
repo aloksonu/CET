@@ -11,21 +11,18 @@ public class PausePanel : MonoSingleton<PausePanel>
 {
     private static Action _onComplete;
     [SerializeField] private CanvasGroup _canvasGroup;
-    [SerializeField] private Button btnPause, btnResume,btnRetry,btnHome;
+    [SerializeField] private Button btnResume,btnRetry,btnHome;
     private float _fadeDuration = 0.1f;
     void Start()
     {
-        btnPause.onClick.AddListener(() => StartCoroutine(_OnClickPauseButton()));
         btnResume.onClick.AddListener(() => StartCoroutine(OnClickResumeButton()));
         btnRetry.onClick.AddListener(() => StartCoroutine(OnClickRetryButton()));
         btnHome.onClick.AddListener(() => StartCoroutine(OnClickHomeButton()));
-        btnPause.gameObject.SetActive(false);
         _canvasGroup.UpdateState(false, 0);
     }
 
     private void OnDestroy()
     {
-        btnPause.onClick.RemoveAllListeners();
         btnResume.onClick.RemoveAllListeners();
         btnRetry.onClick.RemoveAllListeners();
         btnHome.onClick.RemoveAllListeners();
@@ -60,15 +57,11 @@ public class PausePanel : MonoSingleton<PausePanel>
     private IEnumerator OnClickRetryButton()
     {
         GenericAudioManager.Instance.PlaySound(AudioName.ButtonClick);
-        yield return new WaitForSeconds(0.2f);
-        if (Time.timeScale == 0)
-        {
-            Time.timeScale = 1;
-            SceneManager.UnloadSceneAsync(LevelPanel.Instance.levelName.ToString());
-            SceneManager.LoadSceneAsync(LevelPanel.Instance.levelName.ToString(), LoadSceneMode.Additive);
-            _canvasGroup.UpdateState(false, 0);
-        }
-
+        yield return new WaitForSeconds(0);
+        Time.timeScale = 1;
+        SceneManager.UnloadSceneAsync(LevelPanel.Instance.levelName.ToString());
+        SceneManager.LoadSceneAsync(LevelPanel.Instance.levelName.ToString(), LoadSceneMode.Additive);
+        _canvasGroup.UpdateState(false, 0);
     }
 
     private IEnumerator OnClickHomeButton()
@@ -82,10 +75,5 @@ public class PausePanel : MonoSingleton<PausePanel>
             _canvasGroup.UpdateState(false, 0);
         }
 
-    }
-
-    internal void UpdatPauseButtoneState(bool b)
-    {
-        btnPause.gameObject.SetActive(b);
     }
 }
