@@ -42,6 +42,7 @@ public class LevelPanel : MonoSingleton<LevelPanel>
         yield return new WaitForSeconds(GenericAudioManager.Instance.GetAudioLength(AudioName.ButtonClick));
         LoadingPanel.Instance.BringIn();
         yield return SceneManager.LoadSceneAsync(currentSceneName, LoadSceneMode.Additive);
+        //PausePanel.Instance.UpdatPauseButtoneState(true);
         LoadingPanel.Instance.BringOut();
     }
     internal void BringIn()
