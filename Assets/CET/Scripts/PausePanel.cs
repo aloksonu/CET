@@ -35,6 +35,7 @@ public class PausePanel : MonoSingleton<PausePanel>
 
     private IEnumerator _OnClickPauseButton()
     {
+        AudioListener.pause = true;
         GenericAudioManager.Instance.PlaySound(AudioName.ButtonClick);
         yield return new WaitForSeconds(0.0f);
         if (Time.timeScale == 1)
@@ -51,7 +52,9 @@ public class PausePanel : MonoSingleton<PausePanel>
         Time.timeScale = 1;
         GenericAudioManager.Instance.PlaySound(AudioName.ButtonClick);
         yield return new WaitForSeconds(0.0f);
-        _canvasGroup.UpdateState(false, _fadeDuration);
+        _canvasGroup.UpdateState(false, _fadeDuration,()=> {
+            AudioListener.pause = false;
+        });
     }
 
     private IEnumerator OnClickRetryButton()
@@ -61,6 +64,7 @@ public class PausePanel : MonoSingleton<PausePanel>
         Time.timeScale = 1;
         SceneManager.UnloadSceneAsync(LevelPanel.Instance.levelName.ToString());
         SceneManager.LoadSceneAsync(LevelPanel.Instance.levelName.ToString(), LoadSceneMode.Additive);
+        AudioListener.pause = false;
         _canvasGroup.UpdateState(false, 0);
     }
 
@@ -71,6 +75,7 @@ public class PausePanel : MonoSingleton<PausePanel>
         if (Time.timeScale == 0)
         {
             Time.timeScale = 1;
+            AudioListener.pause = false;
             yield return SceneManager.UnloadSceneAsync(LevelPanel.Instance.levelName.ToString());
             _canvasGroup.UpdateState(false, 0);
         }
