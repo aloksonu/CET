@@ -165,6 +165,16 @@ namespace Audio.CET
             }
             return audiolenght;
         }
-    }
 
+        internal void StopAllSounds()
+        {
+            foreach (AudioElement audioElement in audioDataAsset.data)
+            {
+                foreach (AudioSource audioSource in audioElement.audioSources)
+                {
+                    audioSource.Stop();
+                }
+            }
+        }
+    }
 }

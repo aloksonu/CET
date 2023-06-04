@@ -62,6 +62,7 @@ public class PausePanel : MonoSingleton<PausePanel>
         GenericAudioManager.Instance.PlaySound(AudioName.ButtonClick);
         yield return new WaitForSeconds(0);
         Time.timeScale = 1;
+        GenericAudioManager.Instance.StopAllSounds();
         SceneManager.UnloadSceneAsync(LevelPanel.Instance.levelName.ToString());
         SceneManager.LoadSceneAsync(LevelPanel.Instance.levelName.ToString(), LoadSceneMode.Additive);
         AudioListener.pause = false;
@@ -75,6 +76,7 @@ public class PausePanel : MonoSingleton<PausePanel>
         if (Time.timeScale == 0)
         {
             Time.timeScale = 1;
+            GenericAudioManager.Instance.StopAllSounds();
             AudioListener.pause = false;
             yield return SceneManager.UnloadSceneAsync(LevelPanel.Instance.levelName.ToString());
             _canvasGroup.UpdateState(false, 0);
