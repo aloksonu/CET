@@ -43,6 +43,7 @@ public class LevelPanel : MonoSingleton<LevelPanel>
         LoadingPanel.Instance.BringIn();
         yield return SceneManager.LoadSceneAsync(currentSceneName, LoadSceneMode.Additive);
         //PausePanel.Instance.UpdatPauseButtoneState(true);
+        _canvasGroup.UpdateState(false, _fadeDuration);
         LoadingPanel.Instance.BringOut();
     }
     internal void BringIn()

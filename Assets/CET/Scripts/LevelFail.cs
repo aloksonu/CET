@@ -56,5 +56,6 @@ public class LevelFail : MonoSingleton<LevelFail>
     {
         yield return SceneManager.UnloadSceneAsync(LevelPanel.Instance.levelName.ToString());
         _canvasGroup.UpdateState(false, 0);
+        LevelPanel.Instance.BringIn();
     }
 }

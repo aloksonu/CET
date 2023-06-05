@@ -80,6 +80,7 @@ public class PausePanel : MonoSingleton<PausePanel>
             AudioListener.pause = false;
             yield return SceneManager.UnloadSceneAsync(LevelPanel.Instance.levelName.ToString());
             _canvasGroup.UpdateState(false, 0);
+            LevelPanel.Instance.BringIn();
         }
 
     }

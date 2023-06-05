@@ -29,7 +29,7 @@ public class LevelComplete : MonoSingleton<LevelComplete>
     internal void BringIn(float fadeDuration = 0.2f)
     {
         _fadeDuration = fadeDuration;
-        //gameCompleteTextMeshProUGUI.text = _gameCompleteText + " " + LevelPanel.Instance.levelName;
+        gameCompleteTextMeshProUGUI.text = _gameCompleteText + " " + LevelPanel.Instance.levelName;
         _canvasGroup.UpdateState(true, _fadeDuration);
         //UnlockNextLevel();
     }
@@ -55,6 +55,7 @@ public class LevelComplete : MonoSingleton<LevelComplete>
         //yield return SceneManager.UnloadSceneAsync("CETinterface");
         yield return SceneManager.UnloadSceneAsync(LevelPanel.Instance.levelName.ToString());
         _canvasGroup.UpdateState(false, 0);
+        LevelPanel.Instance.BringIn();
     }
     IEnumerator LoadNextScene()
     {
