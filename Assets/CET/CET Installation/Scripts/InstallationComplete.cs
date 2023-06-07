@@ -62,6 +62,7 @@ public class InstallationComplete : MonoBehaviour
 
     private IEnumerator OnClickOkButton()
     {
+        btnOK.interactable = false;
         GenericAudioManager.Instance.PlaySound(AudioName.ButtonClick);
         yield return new WaitForSeconds(GenericAudioManager.Instance.GetAudioLength(AudioName.ButtonClick));
         if (_onComplete != null)
@@ -69,6 +70,7 @@ public class InstallationComplete : MonoBehaviour
             _canvasGroup.UpdateState(false, _fadeDuration, () => {
                 _onComplete();
                 _onComplete = null;
+                btnOK.interactable = true;
             });
         }
     }

@@ -36,6 +36,7 @@ public class OkManager : MonoBehaviour
 
     IEnumerator EBringOut()
     {
+        btnOk.interactable = false;
         GenericAudioManager.Instance.PlaySound(AudioName.ButtonClick);
         yield return new WaitForSeconds(GenericAudioManager.Instance.GetAudioLength(AudioName.ButtonClick));
         if (_onComplete != null)
@@ -43,12 +44,14 @@ public class OkManager : MonoBehaviour
             _canvasGroup.UpdateState(false, _fadeDuration, () => {
                 _onComplete();
                 _onComplete = null;
+                btnOk.interactable = true;
             });
         }
         else
         {
             _canvasGroup.UpdateState(false, _fadeDuration, () => {
                 _onComplete = null;
+                btnOk.interactable = true;
             });
         }
     }

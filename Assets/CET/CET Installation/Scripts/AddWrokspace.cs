@@ -54,6 +54,7 @@ public class AddWrokspace : MonoBehaviour
 
     IEnumerator EBringOut()
     {
+        btnContinue.interactable = false;
         GenericAudioManager.Instance.PlaySound(AudioName.ButtonClick);
         yield return new WaitForSeconds(GenericAudioManager.Instance.GetAudioLength(AudioName.ButtonClick));
         if (isToggle1 == true && isToggle2 == true && isToggle3 == true)
@@ -61,10 +62,12 @@ public class AddWrokspace : MonoBehaviour
             _canvasGroup.UpdateState(false, _fadeDuration, () => {
                 _onComplete();
                 _onComplete = null;
+                btnContinue.interactable = true;
             });
         }
         else
         {
+            btnContinue.interactable = true;
             Debug.Log("Please tick all required togglel for contineue");
         }
     }

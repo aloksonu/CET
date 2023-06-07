@@ -32,6 +32,7 @@ public class AgreePanel : MonoBehaviour
     }
     IEnumerator EBringOut()
     {
+        btnContinue.interactable = false;
         GenericAudioManager.Instance.PlaySound(AudioName.ButtonClick);
         yield return new WaitForSeconds(GenericAudioManager.Instance.GetAudioLength(AudioName.ButtonClick));
         if (_onComplete != null && isToggle == true)
@@ -39,10 +40,12 @@ public class AgreePanel : MonoBehaviour
             _canvasGroup.UpdateState(false, _fadeDuration, () => {
                 _onComplete();
                 _onComplete = null;
+                btnContinue.interactable = true;
             });
         }
         else
         {
+            btnContinue.interactable = true;
             Debug.Log("Please agree for contineue");
         }
     }
