@@ -26,4 +26,5 @@ public enum LevelsName
     CETInstallation = 1,
     CETinterface = 2,
     CETnavigation = 3,
+    Emacs = 4,
 }
