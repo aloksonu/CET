@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Audio.CET
+namespace CET.Common.Audio
 {
     [CreateAssetMenu(fileName = "AudioData_", menuName = "Audio/AudioData", order = 1)]
     public class AudioData : ScriptableObject

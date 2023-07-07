@@ -4,51 +4,54 @@ using UnityEngine;
 using UnityEngine.UI;
 using Utilities;
 
-public class TextNarrator : MonoSingleton<TextNarrator>
+namespace CET.Scripts
 {
-    private static Action _onCompleteNarrator;
-    [SerializeField] private CanvasGroup _canvasGroup;
-    [SerializeField] private TextMeshProUGUI panelText;
-    [SerializeField] private Button btnClose;
-    private string _narratorText;
-    private float _fadeDuration = 0.2f;
-    public bool isNarratorOpen = false;
-    void Start()
+    public class TextNarrator : MonoSingleton<TextNarrator>
     {
-        _canvasGroup.UpdateState(false, 0);
-        btnClose.onClick.AddListener(BringOutNarrator);
-    }
-    private void OnDestroy()
-    {
-        btnClose.onClick.RemoveAllListeners();
-    }
-    internal void BringInNarrator(string narratorText,
-         Action onCompleteNarrator = null)
-    {
-        _narratorText = narratorText;
-        panelText.text = _narratorText;
-        _onCompleteNarrator = onCompleteNarrator;
-        isNarratorOpen = true;
-        _canvasGroup.UpdateState(true, _fadeDuration);
-    }
-
-    internal void BringOutNarrator()
-    {
-        isNarratorOpen = false;
-        if (_onCompleteNarrator != null)
+        private static Action _onCompleteNarrator;
+        [SerializeField] private CanvasGroup _canvasGroup;
+        [SerializeField] private TextMeshProUGUI panelText;
+        [SerializeField] private Button btnClose;
+        private string _narratorText;
+        private float _fadeDuration = 0.2f;
+        public bool isNarratorOpen = false;
+        void Start()
         {
-            _canvasGroup.UpdateState(false, _fadeDuration, () => {
-
-                _onCompleteNarrator();
-                _onCompleteNarrator = null;
-            });
+            _canvasGroup.UpdateState(false, 0);
+            btnClose.onClick.AddListener(BringOutNarrator);
         }
-        else
+        private void OnDestroy()
         {
-            _canvasGroup.UpdateState(false, _fadeDuration, () => {
-                _onCompleteNarrator = null;
-            });
+            btnClose.onClick.RemoveAllListeners();
+        }
+        internal void BringInNarrator(string narratorText,
+            Action onCompleteNarrator = null)
+        {
+            _narratorText = narratorText;
+            panelText.text = _narratorText;
+            _onCompleteNarrator = onCompleteNarrator;
+            isNarratorOpen = true;
+            _canvasGroup.UpdateState(true, _fadeDuration);
         }
 
+        internal void BringOutNarrator()
+        {
+            isNarratorOpen = false;
+            if (_onCompleteNarrator != null)
+            {
+                _canvasGroup.UpdateState(false, _fadeDuration, () => {
+
+                    _onCompleteNarrator();
+                    _onCompleteNarrator = null;
+                });
+            }
+            else
+            {
+                _canvasGroup.UpdateState(false, _fadeDuration, () => {
+                    _onCompleteNarrator = null;
+                });
+            }
+
+        }
     }
 }

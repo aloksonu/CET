@@ -1,70 +1,72 @@
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class GameManager : MonoBehaviour
+namespace CET.Platformer.Scripts
 {
-    public static GameManager instance;
-    public CanvasGroup cgGameWin;
-    public CanvasGroup cgGameLoose;
-    public TextMeshProUGUI coinText;
-    public TextMeshProUGUI timeText;
-    public float timeLimit = 60f;
-    private float timeLeft;
-    private int collectedCoins = 0;
-
-    void Awake()
+    public class GameManager : MonoBehaviour
     {
-        if (instance == null)
-            instance = this;
-        else if (instance != this)
-            Destroy(gameObject);
-    }
+        public static GameManager instance;
+        public CanvasGroup cgGameWin;
+        public CanvasGroup cgGameLoose;
+        public TextMeshProUGUI coinText;
+        public TextMeshProUGUI timeText;
+        public float timeLimit = 60f;
+        private float timeLeft;
+        private int collectedCoins = 0;
 
-    void Start()
-    {
-        timeLeft = timeLimit;
-        UpdateCoinText();
-        UpdateTimeText();
-    }
-
-    void Update()
-    {
-        timeLeft -= Time.deltaTime;
-        UpdateTimeText();
-
-        if (timeLeft <= 0f)
+        void Awake()
         {
-            EndGame(cgGameLoose);
+            if (instance == null)
+                instance = this;
+            else if (instance != this)
+                Destroy(gameObject);
         }
-    }
 
-    public void CollectCoin()
-    {
-        collectedCoins++;
-        UpdateCoinText();
-
-        if (collectedCoins >= 6)
+        void Start()
         {
-            EndGame(cgGameWin);
+            timeLeft = timeLimit;
+            UpdateCoinText();
+            UpdateTimeText();
         }
-    }
 
-    private void UpdateCoinText()
-    {
-        coinText.text = "Coins: " + collectedCoins.ToString();
-    }
+        void Update()
+        {
+            timeLeft -= Time.deltaTime;
+            UpdateTimeText();
 
-    private void UpdateTimeText()
-    {
-        timeText.text = "Time: " + Mathf.RoundToInt(timeLeft).ToString();
-    }
+            if (timeLeft <= 0f)
+            {
+                EndGame(cgGameLoose);
+            }
+        }
 
-    private void EndGame(CanvasGroup cg)
-    {
-        // Display the end game message
-        cg.alpha = 1f;
-        cg.blocksRaycasts = true;
-        cg.interactable = true;
+        public void CollectCoin()
+        {
+            collectedCoins++;
+            UpdateCoinText();
+
+            if (collectedCoins >= 6)
+            {
+                EndGame(cgGameWin);
+            }
+        }
+
+        private void UpdateCoinText()
+        {
+            coinText.text = "Coins: " + collectedCoins.ToString();
+        }
+
+        private void UpdateTimeText()
+        {
+            timeText.text = "Time: " + Mathf.RoundToInt(timeLeft).ToString();
+        }
+
+        private void EndGame(CanvasGroup cg)
+        {
+            // Display the end game message
+            cg.alpha = 1f;
+            cg.blocksRaycasts = true;
+            cg.interactable = true;
+        }
     }
 }

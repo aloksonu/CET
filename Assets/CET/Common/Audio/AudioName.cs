@@ -1,4 +1,4 @@
-﻿namespace Audio.CET
+﻿namespace CET.Common.Audio
 {
     public enum AudioName
     {

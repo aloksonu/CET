@@ -1,22 +1,23 @@
-using Audio.CET;
-using System.Collections;
-using System.Collections.Generic;
+using CET.Common.Audio;
 using UnityEngine;
 
-public class SubLevelName : MonoBehaviour
+namespace CET.ConfiguraIntroduction.Scripts
 {
-    public SubLevel subLevelName;
-    public AudioName audioName;
-    void Start()
+    public class SubLevelName : MonoBehaviour
     {
+        public SubLevel subLevelName;
+        public AudioName audioName;
+        void Start()
+        {
         
+        }
     }
-}
 
-public enum SubLevel
-{
-    NotSet = 0,
-    CET = 1,
-    EMacs = 2,
-    CM = 3,
+    public enum SubLevel
+    {
+        NotSet = 0,
+        CET = 1,
+        EMacs = 2,
+        CM = 3,
+    }
 }

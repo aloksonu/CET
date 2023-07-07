@@ -3,9 +3,8 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-using Utilities;
 
-namespace CommonSystem.MenuPanel.Script
+namespace CET.Emacs.Scripts
 {
     public class ChapterSwipe : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler
     {

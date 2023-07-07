@@ -2,7 +2,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace GamePlay.Quiz
+namespace CET.Common.Quiz
 {
     public class QuestionPanel : MonoBehaviour
     {

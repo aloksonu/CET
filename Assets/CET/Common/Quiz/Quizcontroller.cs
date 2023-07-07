@@ -1,10 +1,10 @@
 using System;
-using Ui.ScoreSystem;
+using CET.Common.Score;
 using UnityEngine;
 using UnityEngine.UI;
 using Utilities;
 
-namespace GamePlay.Quiz
+namespace CET.Common.Quiz
 {
     public class Quizcontroller : MonoSingleton<Quizcontroller>
     {
