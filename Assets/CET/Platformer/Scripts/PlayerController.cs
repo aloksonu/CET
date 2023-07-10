@@ -7,7 +7,9 @@ namespace CET.Platformer.Scripts
         public GameObject platformPrefab;
         public GameObject coinPrefab;
         public GameObject parentPlatFormPrefab;
+        public GameObject obstacalPrefab;
         public GameObject parentCoinPrefab;
+        public GameObject parentObstacalPrefab;
         public float moveSpeed = 5f;
         public float jumpForce = 5f;
         private bool isJumping = false;
@@ -48,6 +50,9 @@ namespace CET.Platformer.Scripts
                 float coinTransformPositionX = Random.Range(this.transform.position.x+4 , this.transform.position.x +9f);
                 float coinTransformPositionY = Random.Range(-3.3f, 0f);
                 SpawnCoin(coinTransformPositionX, coinTransformPositionY);
+
+                float obstacalTransformPositionX = Random.Range(coinTransformPositionX + 5, coinTransformPositionX + 8);
+                SpawnObstacal(obstacalTransformPositionX, -3.73f);
             }
         }
 
@@ -68,6 +73,11 @@ namespace CET.Platformer.Scripts
         {
             GameObject g = Instantiate(coinPrefab, new Vector3(x, y, 0f), Quaternion.identity);
             g.transform.SetParent(parentCoinPrefab.transform);
+        }
+        void SpawnObstacal(float x, float y)
+        {
+            GameObject g = Instantiate(obstacalPrefab, new Vector3(x, y, 0f), Quaternion.identity);
+            g.transform.SetParent(parentObstacalPrefab.transform);
         }
     }
 }
